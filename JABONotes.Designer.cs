@@ -38,9 +38,7 @@
             this.Name = "JABONotes";
             this.Text = "JABONotes";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.JABONotes_FormClosing);
-            this.Load += new System.EventHandler(this.JABONotes_Load);
             this.ResumeLayout(false);
-
         }
 
         #endregion

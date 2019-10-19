@@ -1,36 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace JABO
 {
-    public class FormManager
+	public class FormManager
     {
-        public Dictionary<Type, Form> Forms;
-        private static FormManager instance;
-        public static FormManager Instance
-        {
-            get
-            {
-                if (instance == null) instance = new FormManager();
+        private readonly Dictionary<Type, Form> _forms;
 
-                return instance;
+        private static FormManager _instance;
 
-            }
-        }
-        public T GetForm<T>() where T : Form, new()
+        public static FormManager Instance =>
+			_instance ?? (_instance = new FormManager());
+
+		public bool IsAllFormsHidden { get; private set; }
+
+		public T GetForm<T>() where T : Form, new()
         {
             var type = typeof(T);
-            if (Forms.ContainsKey(type)) return Forms[type] as T;
-            Forms[type] = new T();
-            return Forms[type] as T;
+
+			if (_forms.TryGetValue(type, out var cachedForm))
+				return cachedForm as T;
+
+			var form = new T();
+            _forms[type] = form;
+
+			form.VisibleChanged += FormVisibleChanged;
+
+            return _forms[type] as T;
         }
-        public FormManager()
+
+		private void FormVisibleChanged(object sender, EventArgs e)
+		{
+			IsAllFormsHidden = _forms
+				.Select(c => c.Value)
+				.All(c => !c.Visible);
+		}
+
+		public FormManager()
         {
-            Forms = new Dictionary<Type, Form>();
+            _forms = new Dictionary<Type, Form>();
+			IsAllFormsHidden = false;
         }
     }
 }

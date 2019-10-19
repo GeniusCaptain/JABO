@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace JABO
 {
-    static class Program
+	static class Program
     {
         /// <summary>
         /// Главная точка входа для приложения.
@@ -16,8 +13,12 @@ namespace JABO
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            FormManager.Instance.GetForm<JABO>().Show();
-            while (true) Application.DoEvents();
+
+			var formManager = FormManager.Instance;
+            formManager.GetForm<JABO>().Show();
+
+			while (!formManager.IsAllFormsHidden)
+				Application.DoEvents();
         }
     }
 }
