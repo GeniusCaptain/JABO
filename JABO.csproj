@@ -61,25 +61,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainForm.cs">
+    <Compile Include="UI\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
+    <Compile Include="UI\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormManager.cs" />
-    <Compile Include="JABONotes.cs">
+    <Compile Include="Core\FormManager.cs" />
+    <Compile Include="UI\JABONotes.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="JABONotes.Designer.cs">
+    <Compile Include="UI\JABONotes.Designer.cs">
       <DependentUpon>JABONotes.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="MainForm.resx">
+    <EmbeddedResource Include="UI\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="JABONotes.resx">
+    <EmbeddedResource Include="UI\JABONotes.resx">
       <DependentUpon>JABONotes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
